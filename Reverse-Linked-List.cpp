@@ -9,16 +9,21 @@
 9 * };
 10 */
 11class Solution {
-12public:
-13    ListNode* reverseList(ListNode* head) {
-14        ListNode* curr = head;
-15        ListNode* prev = NULL;
-16        while(curr!=NULL){
-17            ListNode* next = curr->next;
-18            curr->next = prev;
-19            prev = curr;
-20            curr = next;
-21        }
-22        return prev;
-23    }
-24};
+12private:
+13void rev(ListNode* &head,ListNode* prev,ListNode* curr){
+14    if(curr == NULL){
+15        head = prev;
+16        return;
+17    }
+18
+19    ListNode* nextnode = curr->next;
+20
+21    curr->next = prev;
+22    rev(head,curr,nextnode);
+23}
+24public:
+25    ListNode* reverseList(ListNode* head) {
+26        rev(head,NULL,head);
+27        return head;
+28    }
+29};
